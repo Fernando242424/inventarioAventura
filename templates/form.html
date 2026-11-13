@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+{% block title %}{{ titulo }}{% endblock %}
+{% block contenido %}
+<h1 class="h3 mb-4 text-gray-800">{{ titulo }}</h1>
+<div class="card shadow mb-4"><div class="card-body">
+    <form method="post" style="max-width:560px">
+        {% csrf_token %}
+        {% for f in form %}
+        <div class="form-group {% if f.field.widget.input_type == 'checkbox' %}form-check{% endif %}">
+            {% if f.field.widget.input_type == 'checkbox' %}
+                {{ f }} <label class="form-check-label" for="{{ f.id_for_label }}">{{ f.label }}</label>
+            {% else %}
+                <label for="{{ f.id_for_label }}">{{ f.label }}</label>
+                {{ f }}
+            {% endif %}
+            {% if f.help_text %}<small class="text-muted d-block">{{ f.help_text }}</small>{% endif %}
+            {% for e in f.errors %}<div class="text-danger small">{{ e }}</div>{% endfor %}
+        </div>
+        {% endfor %}
+        {% for e in form.non_field_errors %}<div class="text-danger small">{{ e }}</div>{% endfor %}
+        <button class="btn btn-success">Guardar</button>
+        <a href="{% url volver %}" class="btn btn-secondary">Cancelar</a>
+    </form>
+</div></div>
+{% endblock %}

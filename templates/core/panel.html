@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+{% block title %}Panel{% endblock %}
+{% block contenido %}
+<h1 class="h3 mb-4 text-gray-800">Bienvenido, {{ user.get_full_name|default:user.username }}</h1>
+<div class="row">
+{% if rol == "admin" %}
+    {% include 'core/tarjeta.html' with titulo="Usuarios" valor=usuarios color="primary" icono="fa-users" enlace="usuario_lista" %}
+    {% include 'core/tarjeta.html' with titulo="Categorías" valor=categorias color="info" icono="fa-tags" enlace="categoria_lista" %}
+    {% include 'core/tarjeta.html' with titulo="Experiencias" valor=experiencias color="success" icono="fa-hiking" enlace="experiencia_lista" %}
+    {% include 'core/tarjeta.html' with titulo="Reservas" valor=reservas color="warning" icono="fa-ticket-alt" enlace="reserva_lista" %}
+{% elif rol == "guia" %}
+    {% include 'core/tarjeta.html' with titulo="Mis experiencias" valor=mis_experiencias color="success" icono="fa-hiking" enlace="experiencia_lista" %}
+    {% include 'core/tarjeta.html' with titulo="Inscritos en mis experiencias" valor=mis_inscritos color="info" icono="fa-user-check" enlace="experiencia_lista" %}
+{% else %}
+    {% include 'core/tarjeta.html' with titulo="Mis reservas" valor=mis_reservas color="success" icono="fa-ticket-alt" enlace="reserva_lista" %}
+    {% include 'core/tarjeta.html' with titulo="Experiencias disponibles" valor=disponibles color="info" icono="fa-list" enlace="catalogo" %}
+{% endif %}
+</div>
+{% endblock %}

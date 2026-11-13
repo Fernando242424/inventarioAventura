@@ -1,0 +1,25 @@
+{% extends 'base_login.html' %}
+{% block title %}Iniciar sesión{% endblock %}
+{% block contenido %}
+<div class="row justify-content-center">
+    <div class="col-lg-6">
+        <div class="p-5">
+            <div class="text-center">
+                <h1 class="h4 text-gray-900 mb-4"><i class="fas fa-mountain text-success"></i> Aventuras del Sur</h1>
+            </div>
+            {% for m in messages %}<div class="alert alert-{{ m.tags|default:'info' }} small">{{ m }}</div>{% endfor %}
+            {% for e in form.non_field_errors %}<div class="alert alert-danger small">{{ e }}</div>{% endfor %}
+            <form class="user" method="post">
+                {% csrf_token %}
+                <input type="hidden" name="next" value="{{ next }}">
+                <div class="form-group"><input type="text" name="username" class="form-control form-control-user" placeholder="Usuario" autofocus required></div>
+                <div class="form-group"><input type="password" name="password" class="form-control form-control-user" placeholder="Contraseña" required></div>
+                <button class="btn btn-success btn-user btn-block" type="submit">Ingresar</button>
+            </form>
+            <hr>
+            <div class="text-center"><a class="small" href="{% url 'registro' %}">¿Eres turista? ¡Crea tu cuenta!</a></div>
+            <div class="text-center"><a class="small" href="{% url 'inicio' %}">Volver al inicio</a></div>
+        </div>
+    </div>
+</div>
+{% endblock %}

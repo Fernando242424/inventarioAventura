@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+{% block title %}Catálogo{% endblock %}
+{% block contenido %}
+<h1 class="h3 mb-3 text-gray-800">Catálogo de experiencias</h1>
+<div class="card shadow mb-4"><div class="card-body"><div class="table-responsive">
+<table class="table table-bordered table-hover datatable" width="100%">
+    <thead><tr><th>Experiencia</th><th>Categoría</th><th>Fecha y hora</th><th>Precio</th><th>Cupos libres</th><th>Guía</th>{% if rol == "turista" %}<th class="no-orden">Reservar</th>{% endif %}</tr></thead>
+    <tbody>
+    {% for e in experiencias %}
+    <tr>
+        <td><strong>{{ e.titulo }}</strong><br><small class="text-muted">{{ e.descripcion|truncatechars:90 }}</small></td>
+        <td>{{ e.categoria }}</td>
+        <td data-order="{{ e.fecha_hora|date:'Y-m-d H:i' }}">{{ e.fecha_hora|date:"d/m/Y H:i" }}</td>
+        <td>${{ e.precio }}</td>
+        <td>{{ e.cupos_disponibles }}</td>
+        <td>{{ e.creador.get_full_name|default:e.creador.username }}</td>
+        {% if rol == "turista" %}
+        <td class="text-nowrap">
+            {% if e.pk in inscritas %}
+                <span class="badge badge-info">Ya inscrito</span>
+            {% elif e.cupos_disponibles <= 0 %}
+                <span class="badge badge-secondary">Sin cupos</span>
+            {% else %}
+                <form action="{% url 'inscribirse' e.pk %}" method="post" class="d-inline">{% csrf_token %}
+                    <button class="btn btn-sm btn-success">Inscribirme</button></form>
+            {% endif %}
+        </td>
+        {% endif %}
+    </tr>
+    {% endfor %}
+    </tbody>
+</table></div></div></div>
+{% endblock %}

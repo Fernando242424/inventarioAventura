@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+{% block title %}Usuarios{% endblock %}
+{% block contenido %}
+<div class="d-flex justify-content-between mb-3">
+    <h1 class="h3 text-gray-800">Usuarios</h1>
+    <div><a href="{% url 'usuario_crear' %}" class="btn btn-success"><i class="fas fa-plus"></i> Nuevo usuario</a></div>
+</div>
+<div class="card shadow mb-4"><div class="card-body"><div class="table-responsive">
+<table class="table table-bordered table-hover datatable" width="100%">
+    <thead><tr><th>Usuario</th><th>Nombre</th><th>Email</th><th>Rol</th><th>Activo</th><th class="no-orden">Acciones</th></tr></thead>
+    <tbody>
+    {% for u in usuarios %}
+    <tr>
+        <td>{{ u.username }}</td><td>{{ u.get_full_name }}</td><td>{{ u.email }}</td>
+        <td>{% if u.perfil %}{{ u.perfil.get_rol_display }}{% else %}Sin perfil{% endif %}</td>
+        <td>{% if u.is_active %}Sí{% else %}No{% endif %}</td>
+        <td class="text-nowrap">
+            <a href="{% url 'usuario_editar' u.pk %}" class="btn btn-sm btn-info">Editar</a>
+            <a href="{% url 'usuario_eliminar' u.pk %}" class="btn btn-sm btn-danger">Eliminar</a>
+        </td>
+    </tr>
+    {% endfor %}
+    </tbody>
+</table></div></div></div>
+{% endblock %}

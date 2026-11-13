@@ -1,0 +1,9 @@
+{% extends 'base.html' %}
+{% block contenido %}
+<div class="text-center mt-5">
+    <div class="error mx-auto" data-text="403">403</div>
+    <p class="lead text-gray-800 mb-3">Acceso denegado</p>
+    <p class="text-gray-500">Tu rol no tiene permiso para ver esta página.</p>
+    <a href="{% url 'panel' %}">&larr; Volver al panel</a>
+</div>
+{% endblock %}

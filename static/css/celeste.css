@@ -1,0 +1,10 @@
+/* Colores celestes: reemplaza el verde de SB Admin 2. Para otro color cambia solo estos valores. */
+:root { --celeste: #4fb3e8; --celeste-oscuro: #2b8cc4; }
+.bg-gradient-success, .bg-gradient-primary { background: linear-gradient(180deg, var(--celeste) 10%, var(--celeste-oscuro) 100%) !important; }
+.btn-success { background-color: var(--celeste); border-color: var(--celeste); color: #fff; }
+.btn-success:hover { background-color: var(--celeste-oscuro); border-color: var(--celeste-oscuro); color: #fff; }
+.badge-success { background-color: var(--celeste); }
+.text-success { color: var(--celeste-oscuro) !important; }
+.border-left-success { border-left: .25rem solid var(--celeste) !important; }
+.btn-info { background-color: #7fd0f5; border-color: #7fd0f5; color: #fff; }
+a { color: var(--celeste-oscuro); }

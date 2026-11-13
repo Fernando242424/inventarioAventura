@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+{% block title %}Categorías{% endblock %}
+{% block contenido %}
+<div class="d-flex justify-content-between mb-3">
+    <h1 class="h3 text-gray-800">Categorías</h1>
+    <div><a href="{% url 'categoria_crear' %}" class="btn btn-success"><i class="fas fa-plus"></i> Nueva categoría</a></div>
+</div>
+<div class="card shadow mb-4"><div class="card-body"><div class="table-responsive">
+<table class="table table-bordered table-hover datatable" width="100%">
+    <thead><tr><th>Nombre</th><th>Descripción</th><th>Estado</th><th>Experiencias</th><th class="no-orden">Acciones</th></tr></thead>
+    <tbody>
+    {% for c in categorias %}
+    <tr>
+        <td>{{ c.nombre }}</td><td>{{ c.descripcion }}</td>
+        <td>{% if c.activo %}<span class="badge badge-success">Activo</span>{% else %}<span class="badge badge-secondary">Inactivo</span>{% endif %}</td>
+        <td>{{ c.total }}</td>
+        <td class="text-nowrap">
+            <a href="{% url 'categoria_editar' c.pk %}" class="btn btn-sm btn-info">Editar</a>
+            <a href="{% url 'categoria_eliminar' c.pk %}" class="btn btn-sm btn-danger">Eliminar</a>
+        </td>
+    </tr>
+    {% endfor %}
+    </tbody>
+</table></div></div></div>
+{% endblock %}
