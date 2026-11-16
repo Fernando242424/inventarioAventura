@@ -8,7 +8,6 @@ from .utils import obtener_rol
 
 
 class RegistroForm(EstiloBootstrap, UserCreationForm):
-    """Registro público: siempre crea un usuario con rol Turista."""
     telefono = forms.CharField(max_length=20, required=False)
 
     class Meta(UserCreationForm.Meta):
@@ -22,7 +21,6 @@ class RegistroForm(EstiloBootstrap, UserCreationForm):
 
 
 class UsuarioForm(EstiloBootstrap, forms.ModelForm):
-    """Formulario del administrador para crear/editar usuarios con su rol."""
     rol = forms.ChoiceField(choices=Perfil.ROLES)
     telefono = forms.CharField(max_length=20, required=False)
     password = forms.CharField(widget=forms.PasswordInput, required=False,

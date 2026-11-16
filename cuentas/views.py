@@ -13,7 +13,6 @@ class VistaLogin(LoginView):
     redirect_authenticated_user = True     
 
 def registro(request):
-    """Registro público de turistas."""
     form = RegistroForm(request.POST or None)
     if form.is_valid():
         form.save()

@@ -3,7 +3,6 @@ from django.db import models
 
 
 class Perfil(models.Model):
-    """Extiende el User de Django con el ROL del usuario."""
     ROLES = [
         ("admin", "Administrador"),
         ("guia", "Guía / Operador"),
